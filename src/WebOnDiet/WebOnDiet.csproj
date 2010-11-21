@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4E347522-11FA-4EA8-B4EB-6CA8633C5086}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebOnDiet</RootNamespace>
+    <AssemblyName>WebOnDiet</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NTemplate">
+      <HintPath>..\packages\NTemplate.0.9.0.25810\lib\NTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionResults\IActionResult.cs" />
+    <Compile Include="Embedded\Adapters\HttpListenerContextAdapter.cs" />
+    <Compile Include="Embedded\Server.cs" />
+    <Compile Include="Framework\Adapter\HttpContextAdapter.cs" />
+    <Compile Include="Framework\Configuration\AspNetAppconfiguration.cs" />
+    <Compile Include="Framework\Routes\AbstractRoute.cs" />
+    <Compile Include="Framework\Routes\ExactMatchRoute.cs" />
+    <Compile Include="Framework\Configuration\IConfiguration.cs" />
+    <Compile Include="Framework\Routes\IRoute.cs" />
+    <Compile Include="Framework\Handlers\NotFoundHandler.cs" />
+    <Compile Include="Framework\Routes\PatternRoute.cs" />
+    <Compile Include="Framework\Handlers\RoutedRequestHandler.cs" />
+    <Compile Include="Framework\Routes\RouteMatch.cs" />
+    <Compile Include="Framework\Routes\GetAttribute.cs" />
+    <Compile Include="Framework\WebOnDietHttpHandlerFactory.cs" />
+    <Compile Include="ViewEngines\IViewEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

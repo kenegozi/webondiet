@@ -1,0 +1,23 @@
+﻿@{
+var i = 1;
+}
+i = @i
+@for (var x=0; x<2; ++x) {
+	<p>foo</p>
+}
+@for (var x=0; x<2; ++x) {
+	@:foo bar
+}
+
+@{
+	for (var x=0; x<2; ++x) {
+	@:foo bar
+}}
+
+@{
+int? j = 2;
+}
+
+this is j:@j.Value
+
+now I want to add dot right after j: @(j).blahblah
