@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Global.asax.bak" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -52,6 +54,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionAssemblyInfo.cs">
+      <Link>Properties\SolutionAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Actions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax.bak</DependentUpon>

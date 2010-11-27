@@ -58,7 +58,10 @@
     <Compile Include="Framework\Routes\GetAttribute.cs" />
     <Compile Include="Framework\WebOnDietHttpHandlerFactory.cs" />
     <Compile Include="ViewEngines\IViewEngine.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="..\SolutionAssemblyInfo.cs">
+			<Link>Properties\SolutionAssemblyInfo.cs</Link>
+		</Compile>
+		<Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

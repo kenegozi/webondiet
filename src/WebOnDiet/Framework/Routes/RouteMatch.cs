@@ -86,7 +86,7 @@ namespace WebOnDiet.Framework.Routes
 		protected abstract T Convert(string values);
 		protected T[] Convert(string[] values)
 		{
-			return values.Select(Convert).ToArray();
+			return values.Select<string, T>(Convert).ToArray();
 		}
 	}
 
