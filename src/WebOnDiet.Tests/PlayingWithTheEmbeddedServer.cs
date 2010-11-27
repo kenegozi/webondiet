@@ -7,7 +7,7 @@ using WebOnDiet.Embedded;
 namespace WebOnDiet.Tests
 {
 	[TestFixture, Ignore("the embedded server is still off")]
-	public class MOMO
+	public class PlayingWithTheEmbeddedServer
 	{
 		[Test]
 		public void A()
