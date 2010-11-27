@@ -86,6 +86,8 @@ namespace WebOnDiet.Framework.Routes
 		protected abstract T Convert(string values);
 		protected T[] Convert(string[] values)
 		{
+			// please do not remove the explicit type. 
+			// for some strange reason, when MSBuild-ing this, it fails without it
 			return values.Select<string, T>(Convert).ToArray();
 		}
 	}
