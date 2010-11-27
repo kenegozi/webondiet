@@ -1,3 +1,7 @@
+#output folder
+
+out/**
+
 #reharper crap
 src/*[Rr]e[Ss]harper*
 
