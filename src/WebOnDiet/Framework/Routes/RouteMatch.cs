@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Web;
 
 namespace WebOnDiet.Framework.Routes
 {
@@ -88,7 +87,9 @@ namespace WebOnDiet.Framework.Routes
 		{
 			// please do not remove the explicit type. 
 			// for some strange reason, when MSBuild-ing this, it fails without it
+// ReSharper disable RedundantTypeArgumentsOfMethod
 			return values.Select<string, T>(Convert).ToArray();
+// ReSharper restore RedundantTypeArgumentsOfMethod
 		}
 	}
 
