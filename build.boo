@@ -1,5 +1,3 @@
-import Boo.Lang.Useful.IO from "Boo.Lang.Useful"
-
 import System.Environment 
 import System.IO
 
@@ -99,13 +97,3 @@ target package:
 		File.Delete(file)
 
 	File.Move(Path.Combine(".\\", "TestResult.xml"), Path.Combine(artifactsDir, "TestResult.xml"))
-
-def first (e as System.Collections.IEnumerable):
-	for i in e:
-		yield i
-		break
-
-def copyFiles (sourceDir, targetDir):
-	files = Directory.GetFiles(sourceDir)
-	for file in files:
-		File.Copy(file, Path.Combine(targetDir, Path.GetFileName(file)))
