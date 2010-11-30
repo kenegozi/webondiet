@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
 using System.Web;
-using WebOnDiet.Framework.Adapter;
+using WebOnDiet.Framework.Adapters;
 using WebOnDiet.Framework.Configuration;
 using WebOnDiet.Framework.Handlers;
 using WebOnDiet.Framework.Routes;

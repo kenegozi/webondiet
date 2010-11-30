@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Security.Policy;
 using System.Web;
 
-namespace WebOnDiet.Framework.Adapter
+namespace WebOnDiet.Framework.Adapters
 {
 	public class HttpContextAdapter : IHttpContext
 	{

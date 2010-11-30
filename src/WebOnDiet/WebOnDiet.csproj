@@ -46,7 +46,7 @@
     <Compile Include="ActionResults\IActionResult.cs" />
     <Compile Include="Embedded\Adapters\HttpListenerContextAdapter.cs" />
     <Compile Include="Embedded\Server.cs" />
-    <Compile Include="Framework\Adapter\HttpContextAdapter.cs" />
+    <Compile Include="Framework\Adapters\HttpContextAdapter.cs" />
     <Compile Include="Framework\Configuration\AspNetAppconfiguration.cs" />
     <Compile Include="Framework\Routes\AbstractRoute.cs" />
     <Compile Include="Framework\Routes\ExactMatchRoute.cs" />
