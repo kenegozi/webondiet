@@ -9,12 +9,12 @@ using WebOnDiet.Framework.Configuration;
 
 namespace TestSite
 {
-	public class Global //: System.Web.HttpApplication , IWebOnDietApplication
+	public class Global : System.Web.HttpApplication //, IWebOnDietApplication
 	{
 
 		protected void Application_Start(object sender, EventArgs e)
 		{
-
+			WebOnDietHttpHandlerFactory.Container.RegisterSingleton(typeof (IPostsRepository), typeof (PostsRepository));
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
@@ -47,9 +47,5 @@ namespace TestSite
 
 		}
 
-		public void Configure(IConfiguration configuration)
-		{
-			
-		}
 	}
 }
