@@ -27,10 +27,11 @@ namespace WebOnDiet.Framework.Handlers
 		public void ProcessRequest(IHttpContext context)
 		{
 			var target = _routeMatch.Route.Target;
-			var instance = Activator.CreateInstance(target.DeclaringType);
+			var instance = WebOnDietHttpHandlerFactory.Container.Resolve(target.DeclaringType);
 			var parameters = _routeMatch.ExtractParameters();
 			var result = target.Invoke(instance, parameters);
-			context.Response.Write(result.ToString());
+			if (result != null)
+				context.Response.Write(result.ToString());
 		}
 	}
 }

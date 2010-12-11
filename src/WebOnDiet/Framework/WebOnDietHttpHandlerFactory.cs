@@ -7,8 +7,10 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
 using System.Web;
+using NTemplate;
 using WebOnDiet.Framework.Adapters;
 using WebOnDiet.Framework.Configuration;
+using WebOnDiet.Framework.Container;
 using WebOnDiet.Framework.Handlers;
 using WebOnDiet.Framework.Routes;
 
@@ -22,17 +24,37 @@ namespace WebOnDiet.Framework
 	{
 		private static readonly IConfiguration Configuration;
 		private static readonly List<IRoute> Routes;
+		public static Container.Kernel Container { get; private set; }
 
 		static WebOnDietHttpHandlerFactory()
 		{
 			Action<IConfiguration> configure = x => { };
 			if (HttpContext.Current != null)
 			{
+				var x = AppDomain.CurrentDomain.SetupInformation.CachePath;
 				var dir = HttpContext.Current.Server.MapPath("~/bin");
 				Configuration = new AspNetAppConfiguration();
-				foreach (var assemblyFilename in Directory.GetFiles(dir, "*.dll", SearchOption.TopDirectoryOnly))
+				var dllFiles = (from f in Directory.GetFiles(dir, "*.dll", SearchOption.TopDirectoryOnly)
+				                select f)
+					.ToDictionary(f => Path.GetFileName(f).ToUpper());
+
+				var target = Path.Combine(x, "manual");
+				if (Directory.Exists(target))
+					Directory.Delete(target, true);
+				Directory.CreateDirectory(target);
+				foreach (var assemblyFilename in Directory.GetFiles(x, "*.dll", SearchOption.AllDirectories))
 				{
-					Configuration.AddRoutesAssembly(Assembly.LoadFile(assemblyFilename));
+					if (dllFiles.ContainsKey(Path.GetFileName(assemblyFilename).ToUpper()))
+					{
+						Configuration.AddRoutesAssembly(Assembly.LoadFile(assemblyFilename));
+						dllFiles.Remove(Path.GetFileName(assemblyFilename).ToUpper());
+					}
+				}
+				foreach (var missing in dllFiles.Values)
+				{
+					var targetDll = Path.Combine(target, Path.GetFileName(missing));
+					File.Copy(missing, targetDll);
+					Configuration.AddRoutesAssembly(Assembly.LoadFile(targetDll));
 				}
 				var currentApp = HttpContext.Current.ApplicationInstance as IWebOnDietApplication;
 				if (currentApp != null)
@@ -54,7 +76,7 @@ namespace WebOnDiet.Framework
 			}
 			configure(Configuration);
 
-			var routedMethods = from assembly in Configuration.RouteAssemblies
+			var routedMethods = (from assembly in Configuration.RouteAssemblies
 								from type in assembly.GetExportedTypes()
 								where type.IsInterface == false
 									  && type.IsAbstract == false
@@ -63,7 +85,7 @@ namespace WebOnDiet.Framework
 								let routeAttribute = attr as IRouteAttribute
 								where routeAttribute != null
 								orderby routeAttribute.Precedence descending
-								select new { RouteAttribute = routeAttribute, Method = method };
+								select new { RouteAttribute = routeAttribute, Method = method }).ToArray();
 			var routes = from r in routedMethods
 						 let route = r.RouteAttribute.Route.IndexOf(':') > 0
 									   ? (IRoute)new PatternRoute(r.RouteAttribute.Route) { Target = new TargetMethod(r.Method) }
@@ -71,6 +93,23 @@ namespace WebOnDiet.Framework
 						 select route;
 
 			Routes = routes.ToList();
+
+			var routeClasses = routedMethods.Select(m => m.Method.DeclaringType).Distinct().ToArray();
+
+			Container = new Kernel();
+			foreach (var routeClass in routeClasses)
+			{
+				Container.Register(routeClass, routeClass);
+			}
+
+			var templateEngine = new NTemplateEngine(AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
+			templateEngine.Initialize();
+			templateEngine.Compile("hello from simple. <%RenderPartial(\"/partial\");%>", "/simple");
+			templateEngine.Compile("hello from simple. a=<%=model[\"a\"]%>", "/partial");
+
+			wod.Render = new Renderer(templateEngine);
+
+
 		}
 
 

@@ -1,19 +1,10 @@
 using System;
+using WebOnDiet.Framework.Routes;
 
-namespace WebOnDiet.Framework.Routes
+// ReSharper disable CheckNamespace
+namespace WebOnDiet
+// ReSharper restore CheckNamespace
 {
-	public interface IRouteAttribute
-	{
-		int Precedence { get; }
-		string Route { get; }
-	}
-
-	public abstract class AbstractRouteAttribute : Attribute, IRouteAttribute
-	{
-		public int Precedence { get; set; }
-		public string Route { get; protected set; }
-	}
-
 	[AttributeUsage(AttributeTargets.Method)]
 	public class GetAttribute : AbstractRouteAttribute
 	{
