@@ -22,12 +22,19 @@ namespace WebOnDiet.Framework
 	}
 	public class WebOnDietHttpHandlerFactory : IHttpHandlerFactory
 	{
-		private static readonly IConfiguration Configuration;
-		private static readonly List<IRoute> Routes;
+		private static IConfiguration Configuration;
+		private static List<IRoute> Routes;
 		public static Container.Kernel Container { get; private set; }
 
+		private static bool initialized;
 		static WebOnDietHttpHandlerFactory()
 		{
+			Initialize();
+		}
+		internal static void Initialize()
+		{
+			if (initialized) return;
+			initialized = true;
 			Action<IConfiguration> configure = x => { };
 			if (HttpContext.Current != null)
 			{
@@ -104,12 +111,8 @@ namespace WebOnDiet.Framework
 
 			var templateEngine = new NTemplateEngine(AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
 			templateEngine.Initialize();
-			templateEngine.Compile("hello from simple. <%RenderPartial(\"/partial\");%>", "/simple");
-			templateEngine.Compile("hello from simple. a=<%=model[\"a\"]%>", "/partial");
-
+			wod.TemplateEngine = templateEngine;
 			wod.Render = new Renderer(templateEngine);
-
-
 		}
 
 

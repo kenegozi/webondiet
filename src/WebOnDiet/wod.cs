@@ -1,3 +1,5 @@
+using System;
+using NTemplate;
 using WebOnDiet.Framework;
 
 // ReSharper disable CheckNamespace
@@ -10,5 +12,19 @@ public static class wod
 // ReSharper restore CheckNamespace
 
 {
+	private static bool initialized;
+	static wod()
+	{
+		Initialize();
+	}
+	internal static void Initialize()
+	{
+		if (initialized) return;
+		initialized = true;
+
+		WebOnDietHttpHandlerFactory.Initialize();
+	}
 	public static Renderer Render { get; internal set; }
+
+	public static NTemplateEngine TemplateEngine { get; set; }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Web;
+using WebOnDiet.Results;
 using WebOnDiet.Framework.Routes;
 
 namespace WebOnDiet.Framework.Handlers
@@ -30,8 +31,14 @@ namespace WebOnDiet.Framework.Handlers
 			var instance = WebOnDietHttpHandlerFactory.Container.Resolve(target.DeclaringType);
 			var parameters = _routeMatch.ExtractParameters();
 			var result = target.Invoke(instance, parameters);
-			if (result != null)
-				context.Response.Write(result.ToString());
+			if (result == null) return;
+			if (result is IViewResult)
+			{
+				var viewResult = (IViewResult) result;
+				wod.Render.Template(viewResult.TemplateName, viewResult.Parameters);
+				return;
+			}
+			context.Response.Write(result.ToString());
 		}
 	}
 }

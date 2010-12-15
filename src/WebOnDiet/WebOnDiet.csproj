@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionResults\IActionResult.cs" />
+    <Compile Include="Framework\ResultProcessors\ResultProcessor.cs" />
+    <Compile Include="Results\IResult.cs" />
     <Compile Include="Embedded\Adapters\HttpListenerContextAdapter.cs" />
     <Compile Include="Embedded\Server.cs" />
     <Compile Include="Framework\Adapters\HttpContextAdapter.cs" />
