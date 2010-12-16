@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebOnDiet\WebOnDiet.csproj">
-      <Project>{4E347522-11FA-4EA8-B4EB-6CA8633C5086}</Project>
+      <Project>{9AA3AB0D-C7D9-4CDB-BC16-80513ABA70A3}</Project>
       <Name>WebOnDiet</Name>
     </ProjectReference>
   </ItemGroup>
