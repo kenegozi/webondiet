@@ -97,3 +97,23 @@ target package:
 		File.Delete(file)
 
 	File.Move(Path.Combine(".\\", "TestResult.xml"), Path.Combine(artifactsDir, "TestResult.xml"))
+	
+	packageSourceDir = ".\\package"
+	packageDir = Path.Combine(artifactsDir,'package')
+	packageLibDir = Path.Combine(packageDir,'lib')
+	packageContentDir = Path.Combine(packageDir,'content')
+	mkdir(packageDir)
+	mkdir(packageLibDir)
+	mkdir(packageContentDir)
+	packageSpec = File.ReadAllText(Path.Combine(packageSourceDir, "package.nuspec"))
+	packageSpec = packageSpec.Replace("%VERSION%", version)
+	packageSpecPath = Path.Combine(packageDir, "package.nuspec")
+	File.WriteAllText(packageSpecPath, packageSpec)
+	for file in Directory.GetFiles(".\\src\\${projectName}\\bin\\${configuration}\\", "${projectName}.*"):
+		cp(file, Path.Combine(packageLibDir, Path.GetFileName(file)))
+	for file in Directory.GetFiles(packageSourceDir, "*.transform"):
+		cp(file, Path.Combine(packageContentDir, Path.GetFileName(file)))
+	
+	exec(".\\tools\\nuget.exe", "pack ${packageSpecPath} -b ${packageDir} -o ${artifactsDir}")
+	rmdir(packageDir)
+	

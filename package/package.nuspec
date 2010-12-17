@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<package> 
+  <metadata> 
+    <id>WebOnDiet</id> 
+    <version>%VERSION%</version> 
+    <authors>Ken Egozi</authors> 
+    <description>Web develpoment made simple</description> 
+    <language>en-US</language> 
+    <dependencies>
+      <dependency id="NTemplate" version="0.9.2" />
+    </dependencies>
+  </metadata> 
+</package>
