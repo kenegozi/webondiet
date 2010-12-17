@@ -1,6 +1,0 @@
-Build info:
-====================
- at: 11/30/2010 1:21:54 PM
- branch: master
- commit: 49e4b3f1d40e749bf8b1ae255bf19c813a257091
- source: git://github.com/kenegozi/ntemplate.git
