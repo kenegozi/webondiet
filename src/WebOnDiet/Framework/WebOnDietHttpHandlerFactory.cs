@@ -138,6 +138,7 @@ namespace WebOnDiet.Framework
 					: "/";
 
 			if (appRelativeUrl == string.Empty) appRelativeUrl = "/";
+			if (appRelativeUrl != "/") appRelativeUrl = appRelativeUrl.TrimEnd('/');
 
 			RouteMatch routeMatch;
 			try
