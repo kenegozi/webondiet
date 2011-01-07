@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{99EC9268-5153-4F36-B1C4-46441FC9FF94}"
 	ProjectSection(SolutionItems) = preProject
 		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+		..\version = ..\version
 	EndProjectSection
 EndProject
 Global
