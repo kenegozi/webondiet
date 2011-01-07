@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\ResultProcessors\ResultProcessor.cs" />
+    <Compile Include="Framework\Routes\RoutesCollection.cs" />
     <Compile Include="Results\IResult.cs" />
     <Compile Include="Embedded\Adapters\HttpListenerContextAdapter.cs" />
     <Compile Include="Embedded\Server.cs" />

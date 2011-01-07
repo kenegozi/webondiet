@@ -57,6 +57,7 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Framework\Routes\PatternRouteTests.cs" />
+    <Compile Include="Framework\Routes\RoutesCollectionTests.cs" />
     <Compile Include="PlayingWithTheEmbeddedServer.cs" />
     <Compile Include="Framework\Routes\ParameterBinderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Policy;
 using System.Web;
 using NTemplate;
 using WebOnDiet.Framework.Adapters;
@@ -23,8 +21,9 @@ namespace WebOnDiet.Framework
 	public class WebOnDietHttpHandlerFactory : IHttpHandlerFactory
 	{
 		private static IConfiguration Configuration;
-		private static List<IRoute> Routes;
-		public static Container.Kernel Container { get; private set; }
+		readonly static RoutesCollection Routes = new RoutesCollection();
+
+		public static Kernel Container { get; private set; }
 
 		private static bool initialized;
 		static WebOnDietHttpHandlerFactory()
@@ -99,7 +98,7 @@ namespace WebOnDiet.Framework
 									   : (IRoute)new ExactMatchRoute(r.RouteAttribute.Route) { Target = new TargetMethod(r.Method) }
 						 select route;
 
-			Routes = routes.ToList();
+			Routes.AddRange(routes);
 
 			var routeClasses = routedMethods.Select(m => m.Method.DeclaringType).Distinct().ToArray();
 
@@ -162,13 +161,7 @@ namespace WebOnDiet.Framework
 
 		static RouteMatch GetRoutedMethod(string appRelativeUrl)
 		{
-			var matches = from route in Routes
-						  let m = route.Match(appRelativeUrl)
-						  where m.Score > int.MinValue
-						  orderby m.Score descending
-						  select m;
-
-			return matches.FirstOrDefault();
+			return Routes.Match(appRelativeUrl);
 		}
 
 		public void ReleaseHandler(IHttpHandler handler)
