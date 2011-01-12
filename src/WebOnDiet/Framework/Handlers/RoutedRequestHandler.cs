@@ -32,13 +32,45 @@ namespace WebOnDiet.Framework.Handlers
 			var parameters = _routeMatch.ExtractParameters();
 			var result = target.Invoke(instance, parameters);
 			if (result == null) return;
-			if (result is IViewResult)
+			if (result is IResult)
 			{
-				var viewResult = (IViewResult) result;
-				wod.Render.Template(viewResult.TemplateName, viewResult.Parameters);
+				Handle((IResult) result, context);
 				return;
 			}
 			context.Response.Write(result.ToString());
+		}
+
+		private void Handle(IResult result, IHttpContext context)
+		{
+			var viewResult = result as IViewResult;
+			if (viewResult != null)
+			{
+				Handle(viewResult, context);
+				return;
+			}
+
+			var redirectResult = result as RedirectResult;
+			if (redirectResult != null)
+			{
+				Handle(redirectResult, context);
+				return;
+			}
+		}
+
+		private void Handle(IViewResult result, IHttpContext context)
+		{
+			wod.Render.Template(result.TemplateName, result.Parameters);
+		}
+
+		private void Handle(RedirectResult result, IHttpContext context)
+		{
+			Action<string, bool> redirectMethod;
+			if (result.IsPermanent)
+				redirectMethod = context.Response.RedirectPermanent;
+			else
+				redirectMethod = context.Response.Redirect;
+
+			redirectMethod(result.Target, true);
 		}
 	}
 }

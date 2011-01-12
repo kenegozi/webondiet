@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Net;
 using System.Web;
 
 namespace WebOnDiet.Framework.Adapters
@@ -55,6 +56,17 @@ namespace WebOnDiet.Framework.Adapters
 		{
 			get { return _inner.ContentType; }
 			set { _inner.ContentType = value; }
+		}
+
+		public void Redirect(string target, bool endResponse)
+		{
+			_inner.Redirect(target, endResponse);
+		}
+
+		public void RedirectPermanent(string target, bool endResponse)
+		{
+			Redirect(target, endResponse);
+			_inner.StatusCode = (int) HttpStatusCode.MovedPermanently;
 		}
 
 		public void Flush()

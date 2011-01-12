@@ -62,6 +62,17 @@ namespace WebOnDiet.Embedded.Adapters
 			set { _inner.ContentType = value; }
 		}
 
+		public void RedirectPermanent(string target, bool endResponse)
+		{
+			Redirect(target, endResponse);
+			_inner.StatusCode = (int)HttpStatusCode.MovedPermanently;
+		}
+
+		public void Redirect(string target, bool endResponse)
+		{
+			_inner.Redirect(target);
+		}
+
 		public void Flush()
 		{
 			_writer.Flush();

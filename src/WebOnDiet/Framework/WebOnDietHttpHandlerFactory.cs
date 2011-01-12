@@ -195,6 +195,8 @@ namespace WebOnDiet.Framework
 		void Clear();
 		int StatusCode { get; set; }
 		string ContentType { get; set; }
+		void RedirectPermanent(string target, bool endResponse);
+		void Redirect(string target, bool endResponse);
 		void Flush();
 	}
 

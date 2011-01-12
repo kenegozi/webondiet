@@ -18,4 +18,10 @@ namespace WebOnDiet.Results
 		public string TemplateName { get; set; }
 		public IDictionary Parameters { get; set; }
 	}
+
+	public class RedirectResult : IResult
+	{
+		public string Target { get; set; }
+		public bool IsPermanent { get; set; }
+	}
 }
