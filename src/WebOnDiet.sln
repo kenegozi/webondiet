@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		..\version = ..\version
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{338B05D8-98AC-483A-A1EC-72D98E885D52}"
+	ProjectSection(SolutionItems) = preProject
+		..\package\package.nuspec = ..\package\package.nuspec
+		..\package\web.config.transform = ..\package\web.config.transform
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +40,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{338B05D8-98AC-483A-A1EC-72D98E885D52} = {99EC9268-5153-4F36-B1C4-46441FC9FF94}
 	EndGlobalSection
 EndGlobal

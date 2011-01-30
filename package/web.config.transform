@@ -1,11 +1,5 @@
 <?xml version="1.0"?>
 <configuration>
-	<system.web>
-		<httpHandlers>
-			<add verb="*" path="*" type="WebOnDiet.Framework.WebOnDietHttpHandlerFactory, WebOnDiet"/>
-		</httpHandlers>
-	</system.web>
-	
 	<system.webServer>
 		<handlers>
 			<add name="WebOnDiet" verb="*" path="*" type="WebOnDiet.Framework.WebOnDietHttpHandlerFactory, WebOnDiet"/>
